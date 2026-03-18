@@ -78,10 +78,28 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-// ── Header Scroll Effect ──────────────────────────
-const header = document.getElementById('header');
+// ── Header Scroll Effect + Nav Scroll Spy ────────
+const header   = document.getElementById('header');
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections   = ['features', 'pricing', 'analytics', 'faqs']
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
+
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
+  const scrollY = window.scrollY;
+
+  // Header background
+  header.classList.toggle('scrolled', scrollY > 40);
+
+  // Scroll-spy: highlight nav link for the section in view
+  let current = '';
+  sections.forEach(sec => {
+    if (scrollY >= sec.offsetTop - 120) current = sec.id;
+  });
+  navAnchors.forEach(a => {
+    const matches = a.getAttribute('href') === '#' + current;
+    a.classList.toggle('active', matches);
+  });
 }, { passive: true });
 
 
@@ -123,7 +141,7 @@ const statsObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 
-const statsSection = document.getElementById('stats-section');
+const statsSection = document.getElementById('analytics');
 if (statsSection) statsObserver.observe(statsSection);
 
 
