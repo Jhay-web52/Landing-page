@@ -788,43 +788,27 @@ nav {
 }
 
 .pricing-card.featured {
-  background: var(--featured-bg);
-  border-color: transparent;
+  background:
+    linear-gradient(145deg, #0c1832, #080f26) padding-box,
+    var(--grad) border-box;
+  border: 1px solid transparent;
   transform: scale(1.04);
   box-shadow: var(--glow-sm);
-}
-.pricing-card.featured::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: var(--grad);
-  border-radius: calc(var(--radius) + 1px);
-  z-index: -1;
 }
 .pricing-card.featured:hover {
   transform: scale(1.04) translateY(-5px);
   box-shadow: var(--glow-lg);
 }
 
-/* Featured card — dark mode: ensure text is clearly readable on deep navy bg */
-.pricing-card.featured .plan-name,
-.pricing-card.featured .plan-desc,
-.pricing-card.featured .price-period {
-  color: #94a3b8; /* slate-400 — solid contrast on #0c1832 */
+/* Light mode featured card */
+[data-theme="light"] .pricing-card.featured {
+  background:
+    linear-gradient(145deg, #eff6ff, #e0f2fe) padding-box,
+    var(--grad) border-box;
 }
-.pricing-card.featured .plan-features li {
-  color: #cbd5e1; /* slate-300 */
-}
-.pricing-card.featured .price-amount {
-  /* gradient text — already bright, no change needed */
-}
-
-/* Light mode featured card: revert to dark text on light-blue bg */
 [data-theme="light"] .pricing-card.featured .plan-name,
 [data-theme="light"] .pricing-card.featured .plan-desc,
-[data-theme="light"] .pricing-card.featured .price-period {
-  color: var(--text-2);
-}
+[data-theme="light"] .pricing-card.featured .price-period,
 [data-theme="light"] .pricing-card.featured .plan-features li {
   color: var(--text-2);
 }
